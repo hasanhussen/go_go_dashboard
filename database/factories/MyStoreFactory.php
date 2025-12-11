@@ -1,0 +1,55 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ */
+class MyStoreFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+   public function definition(): array
+    {
+        // جيب كل الصور من المجلد
+        $files = File::files(public_path('storage/stores'));
+
+        // اختار صورة عشوائية
+        $randomFile = count($files) > 0 ? $files[array_rand($files)] : null;
+
+        // جيب كل الصور من المجلد
+        $coverFiles = File::files(public_path('storage/coverstores'));
+
+        // اختار صورة عشوائية
+        $randomcoverFiles = count($coverFiles) > 0 ? $coverFiles[array_rand($coverFiles)] : null;
+
+        return [
+            'user_id' => \App\Models\User::factory(), // ينشئ مستخدم وهمي ويربطه
+            'category_id' => \App\Models\Category::factory(), // ينشئ تصنيف وهمي ويربطه
+            'name' => $this->faker->company(),
+            'city_id' => $this->faker->numberBetween(1, 20),
+            'delivery' => $this->faker->randomElement(['0','1']),
+            'phone' => $this->faker->numerify('09########'),
+            'image' => $randomFile 
+                ? 'stores/' . $randomFile->getFilename()
+                : null,
+            'cover' => $randomcoverFiles 
+                ? 'coverstores/' . $randomcoverFiles->getFilename()
+                : null,
+            'special' => $this->faker->sentence(3),
+            'address' => $this->faker->address(),
+            'followers' => $this->faker->numberBetween(0, 5000),
+            'x' => $this->faker->latitude(),
+            'y' => $this->faker->longitude(),
+            'status' => $this->faker->randomElement(['0','1','2']),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+    }
+}

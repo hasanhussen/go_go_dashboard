@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+/public/storage
+/.env
+/.idea
+/.vscode
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+*.sqlite*
