@@ -138,3 +138,6 @@ Password Reset & Email Verification
 
 📧 Contact
 hasanhussen03@gmail.com
+
+This project is the **backend** for a Flutter application.  
+Flutter project link: https://github.com/hasanhussen/go_go_application
